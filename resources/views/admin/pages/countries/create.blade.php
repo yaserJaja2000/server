@@ -1,0 +1,34 @@
+@extends('admin.blank')
+
+@section('content')
+    <div class="container mt-3 text-end">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                <h5 class="m-0 font-weight-bold text-secondary">إضافة دولة</h6>
+                <a href="{{ route('countries.index') }}" class="btn btn-secondary btn-sm">العودة</a>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body" dir="rtl">
+                <form action="{{ route('countries.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">اسم الدولة</label>
+                        <span class="text-danger">*</span>
+                        <input type="text" name="name" class="form-control " required>
+                        @error('title')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">أيقونة الدولة</label>
+                        <input class="form-control" name="icon" type="file" id="formFile">
+                        @error('image')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary">إنشاء</button>
+                </form>
+            </div>
+        </div>
+    @endsection
